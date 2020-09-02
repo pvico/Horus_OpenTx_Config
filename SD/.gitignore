@@ -1,0 +1,20 @@
+/CROSSFIRE
+/EEPROM
+/FIRMWARE
+/FrSky-utilities
+/IMAGES
+/LOGS
+/SCREENSHOTS
+/SOUNDS/cz
+/SOUNDS/de
+/SOUNDS/es
+/SOUNDS/fr
+/SOUNDS/it
+/SOUNDS/pt
+/SOUNDS/ru
+/SxR
+/SxR Calibrate
+/THEMES
+opentx.sdcard.version
+*.luac
+.DS_Store
