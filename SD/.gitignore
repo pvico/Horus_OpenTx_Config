@@ -15,9 +15,6 @@
 /SxR
 /SxR Calibrate
 /THEMES
-/WIDGETS/Counter
-/WIDGETS/SHOWALL
-/WIDGETS/Timer2
-opentx.sdcard.version
+/WIDGETS
 *.luac
 .DS_Store
