@@ -14,7 +14,6 @@ local function run()
     startRun = now
     playFile("LchAlt.wav")
     local launchAltitude = getValue(MaxAltitudeSensorId)
-    -- local roundedAltitude = math.floor(altitude)
     playNumber(launchAltitude, METERS, 0)
   end
 end
