@@ -8,7 +8,7 @@ end
 
 local function run()
   local now = getTime()
-  if now > startRun + 200 then
+  if now > startRun + 400 then
     startRun = now
 
     playFile("TimGol.wav")
