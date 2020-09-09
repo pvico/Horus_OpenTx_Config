@@ -1,5 +1,6 @@
 -- global variable, is used by plycap.lua function script
 capa = 0
+motor_run = 0
 
 local capacity = 0
 local capacities = {}
@@ -10,7 +11,7 @@ local input = {
   { "motrunng", SOURCE }
 }
 
-local output = {"capa"}
+local output = {"capa", "motr"}
 
 local function init()
 	for i=1,10 do
@@ -61,7 +62,7 @@ local function run(cellsens, motrunng)
     capa = capacitysum / 10.0
   end
 
-  return 10.24 * capa
+  return 10.24 * capa, motor_run
 end
 
 return { run=run, init=init, input=input, output=output }

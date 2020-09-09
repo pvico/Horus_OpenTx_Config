@@ -1,0 +1,86 @@
+local function round(num)
+    local under = math.floor(num)
+    local upper = math.floor(num) + 1
+    local underV = -(under - num)
+    local upperV = upper - num
+    if (upperV > underV) then
+        return under
+    else
+        return upper
+    end
+end
+
+-- local altimeter_id
+local armed_ls_id
+
+local options = {
+  { "CapaScript", SOURCE }
+}
+
+local function create(zone, options)
+
+  -- altimeter_id = getFieldInfo("Alt").id
+  armed_ls_id = getFieldInfo("ls6").id
+  local widget = { zone=zone, options=options, capacity=0, altitude=0, armed=0, flight_mode={} }
+
+  return widget
+
+end
+
+local function update(wgt, options)
+  if (wgt == nil) then return end
+  wgt.options = options
+end
+
+local function update(widget, newOptions)
+  widget.options = newOptions
+end
+
+local function background(widget)
+
+  widget.capacity = round(getValue(widget.options.CapaScript) / 10.24)
+  -- widget.altitude = getValue(altimeter_id)
+  widget.armed = getValue(armed_ls_id) > 0
+  widget.flight_mode = {getFlightMode()}
+
+end
+
+local function refresh(widget)
+
+  --background is not called automatically in display mode, so do it here if you need it.
+  background(widget) 
+
+  -- lcd.drawText(widget.zone.x, widget.zone.y + 72, "Alt  " .. widget.altitude .. "m", LEFT + MIDSIZE + CUSTOM_COLOR)
+  if widget.flight_mode[1] ~= 1 then
+    -- lcd.setColor(CUSTOM_COLOR, WHITE)
+    lcd.drawText(widget.zone.x, widget.zone.y, widget.flight_mode[2].." mode", LEFT + MIDSIZE + TEXT_COLOR)
+    if widget.armed then
+      lcd.setColor(CUSTOM_COLOR, 0xE120)  -- red (5-6-5 format)
+      lcd.drawText(widget.zone.x, widget.zone.y + 30, "Motor armed", LEFT + MIDSIZE + CUSTOM_COLOR)
+    else
+      lcd.drawText(widget.zone.x, widget.zone.y + 30, "Motor disarmed", LEFT + MIDSIZE + TEXT_COLOR)
+    end
+  else    -- Calibrate mode
+    lcd.setColor(CUSTOM_COLOR, 0xE120)  -- red (5-6-5 format)
+    lcd.drawText(widget.zone.x, widget.zone.y, "CALIBRATION", LEFT + DBLSIZE + CUSTOM_COLOR)
+  end
+
+
+  if widget.capacity >= 50 then 
+    lcd.setColor(CUSTOM_COLOR, 0x4BC4)  -- green (5-6-5 format)
+  elseif widget.capacity >= 25 then
+    lcd.setColor(CUSTOM_COLOR, 0xFE20)  -- amber (5-6-5 format)
+  else
+    lcd.setColor(CUSTOM_COLOR, 0xE120)  -- red (5-6-5 format)
+  end
+
+  lcd.drawRectangle(widget.zone.x, widget.zone.y+64, 140, 32, CUSTOM_COLOR, 3)
+  lcd.drawRectangle(widget.zone.x+137, widget.zone.y+74, 10, 12, CUSTOM_COLOR, 3)
+  lcd.drawFilledRectangle(widget.zone.x, widget.zone.y+64, 140 * widget.capacity / 100, 32, CUSTOM_COLOR, 3)
+  lcd.drawText(widget.zone.x + 160, widget.zone.y + 64, "" .. widget.capacity .. "%", LEFT + DBLSIZE + CUSTOM_COLOR)
+  lcd.setColor(CUSTOM_COLOR, WHITE) 
+
+end
+
+return { name="BattMode", options=options, create=create, update=update,
+  refresh=refresh, background=background }

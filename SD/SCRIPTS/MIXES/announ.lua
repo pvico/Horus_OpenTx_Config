@@ -1,3 +1,5 @@
+launch_altitude = 0
+
 local timer1_id
 local timer1_value
 local timer3_id
@@ -14,7 +16,7 @@ local gliding_ls_id
 
 local input = {}
 
-local output = {}
+local output = {"lalt"}
 
 local function init()
 	last_reported_alt = 0
@@ -31,7 +33,9 @@ local function run()
     local sensed_alt = getValue(altimeter_id)
     local gliding = getValue(gliding_ls_id) > 0
     local motor_running = getValue(motor_running_ls_id) > 0
+
     if motor_running then
+        launch_altitude = 0
         if sensed_alt > 2 then
             local alt_double = math.floor(sensed_alt/2)     -- we need this if we climb fast, we will detect 50m between 50 & 52m
             if (alt_double % 25) == 0 then
@@ -90,7 +94,13 @@ local function run()
                 timer1_value = timer1_val
             end
         end        
+    else        -- Not gliding and motor not running (in the 10" after motor cut)
+        if sensed_alt > launch_altitude then
+            launch_altitude = sensed_alt
+        end
     end
+
+    return launch_altitude
 end
 
 return { run=run, init=init, input=input, output=output }
