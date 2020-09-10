@@ -1,6 +1,6 @@
 -- Plays the launch altitude
 
--- Philippe vico 2020
+-- Philippe Vico 2020
 
 -- Global variable
 -- This variable is set in the announ.lua mix script and used by this script

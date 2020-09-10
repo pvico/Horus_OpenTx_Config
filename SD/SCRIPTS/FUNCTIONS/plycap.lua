@@ -1,6 +1,6 @@
 -- Plays the remaining battery capacity
 
--- Philippe vico 2020
+-- Philippe Vico 2020
 
 -- Global variable
 -- This variable is set in the batcap.lua mix script and used by this script

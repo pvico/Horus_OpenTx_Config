@@ -2,7 +2,7 @@
 -- Plays the flight time goal
 -- Must be called when arming motor 
 
--- Philippe vico 2020
+-- Philippe Vico 2020
 
 local MINUTES = 36  -- OpenTx 2.3
 local startRun = 0

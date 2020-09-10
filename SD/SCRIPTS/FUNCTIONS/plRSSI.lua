@@ -1,6 +1,6 @@
 -- Plays the RSSI value
 
--- Philippe vico 2020
+-- Philippe Vico 2020
 
 local RSSISensorId = 0
 local DB = 17
