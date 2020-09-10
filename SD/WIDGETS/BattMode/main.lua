@@ -5,6 +5,8 @@
 -- - Motor armed/disarmed
 -- - Rx battery remaining capacity
 
+-- TODO: make "ls6" (armed) logical switch input as settable input
+
 -- Philippe Vico 2020
 
 local function round(num)

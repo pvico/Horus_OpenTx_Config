@@ -11,7 +11,7 @@
 
 -- Exports the "lalt" script value (launch altitude)
 
--- TODO: set timers, altitude and logical switches input as settable inputs
+-- TODO: make timers, altitude and logical switches inputs as settable inputs
 
 -- Philippe Vico 2020
 
