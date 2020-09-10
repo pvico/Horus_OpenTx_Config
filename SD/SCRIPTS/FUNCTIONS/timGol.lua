@@ -1,3 +1,9 @@
+-- Sets the timer 1 (flight timer) initial count down value in function of SB
+-- Plays the flight time goal
+-- Must be called when arming motor 
+
+-- Philippe vico 2020
+
 local MINUTES = 36  -- OpenTx 2.3
 local startRun = 0
 local SB_id = 0
@@ -8,7 +14,7 @@ end
 
 local function run()
   local now = getTime()
-  if now > startRun + 400 then
+  if now > startRun + 400 then    -- will only do this if the last function call was at least 4" ago 
     startRun = now
 
     playFile("TimGol.wav")

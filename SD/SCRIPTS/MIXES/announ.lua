@@ -1,3 +1,22 @@
+-- announ mix script
+
+-- Automatically announces
+-- - every 50m while motor is running
+-- - every 20m while gliding
+-- - motor count up timer (5, 10, 15, 18, 20, 22, 24, 26, 28)
+-- - announces flight time remaining
+--   (every minute, 1'30", 50", 40", 30", 20", 15", 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
+
+-- Records the launch altitude, and resets it when motor is running
+
+-- Exports the "lalt" script value (launch altitude)
+
+-- TODO: set timers, altitude and logical switches input as settable inputs
+
+-- Philippe Vico 2020
+
+-- Global variable
+-- This variable is set in this mix script and used by plLAlt.lua function script
 launch_altitude = 0
 
 local timer1_id
@@ -12,7 +31,6 @@ local SECONDS = 37
 local NO_UNIT = 0
 local motor_running_ls_id
 local gliding_ls_id
-
 
 local input = {}
 
@@ -94,7 +112,7 @@ local function run()
                 timer1_value = timer1_val
             end
         end        
-    else        -- Not gliding and motor not running (in the 10" after motor cut)
+    else        -- Not gliding and motor not running: we are in the 10" after motor cut (or on the ground)
         if sensed_alt > launch_altitude then
             launch_altitude = sensed_alt
         end

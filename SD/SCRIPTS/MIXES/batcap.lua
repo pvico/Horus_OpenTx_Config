@@ -1,5 +1,21 @@
--- global variable, is used by plycap.lua function script
+-- batcap mix script
+
+-- The "cellsens" input must be set to the telemetry source measuring lowest rx cell voltage 
+-- The "motrunng" input must be set to the motor running logical switch
+
+-- Computes the remaining battery capacity based on cell voltage
+
+-- Exports the "capa" script value (battery capacity in %)
+-- Exports the "motr" script value (motor run time in %)
+
+-- TODO: the motor run export should be moved to another mix script
+
+-- Philippe Vico 2020
+
+-- Global variables
+-- This variable is set in this script and used by plycap.lua function script
 capa = 0
+-- This variable is set in the plymot.lua function script and used by this script to export "motr"
 motor_run = 0
 
 local capacity = 0

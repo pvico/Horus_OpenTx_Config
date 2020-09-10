@@ -1,6 +1,11 @@
+-- Plays the launch altitude
+
+-- Philippe vico 2020
+
+-- Global variable
+-- This variable is set in the announ.lua mix script and used by this script
 launch_altitude = 0
 
--- Plays get altitude and plays rounded integer value 
 
 local METERS = 9
 local startRun = 0
@@ -10,7 +15,7 @@ end
 
 local function run()
   local now = getTime()
-  if now > startRun + 200 then
+  if now > startRun + 200 then    -- will only do this if the last function call was at least 2" ago 
     startRun = now
     playFile("LchAlt.wav")
     playNumber(launch_altitude, METERS, 0)

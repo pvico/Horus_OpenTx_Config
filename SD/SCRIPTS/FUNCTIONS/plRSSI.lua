@@ -1,3 +1,7 @@
+-- Plays the RSSI value
+
+-- Philippe vico 2020
+
 local RSSISensorId = 0
 local DB = 17
 local startRun = 0
@@ -8,11 +12,10 @@ end
 
 local function run()
   local now = getTime()
-  if now > startRun + 200 then
+  if now > startRun + 200 then    -- will only do this if the last function call was at least 2" ago 
     startRun = now
     playFile("RSSI.wav")
     local rssi = getValue(RSSISensorId)
-    -- local roundedAltitude = math.floor(altitude)
     playNumber(rssi, DB, 0)
   end
 end

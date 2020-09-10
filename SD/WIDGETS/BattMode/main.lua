@@ -1,3 +1,12 @@
+-- BattMode widget
+
+-- Shows
+-- - Flight mode
+-- - Motor armed/disarmed
+-- - Rx battery remaining capacity
+
+-- Philippe Vico 2020
+
 local function round(num)
     local under = math.floor(num)
     local upper = math.floor(num) + 1
@@ -10,7 +19,6 @@ local function round(num)
     end
 end
 
--- local altimeter_id
 local armed_ls_id
 
 local options = {
@@ -19,7 +27,6 @@ local options = {
 
 local function create(zone, options)
 
-  -- altimeter_id = getFieldInfo("Alt").id
   armed_ls_id = getFieldInfo("ls6").id
   local widget = { zone=zone, options=options, capacity=0, altitude=0, armed=0, flight_mode={} }
 
@@ -39,7 +46,6 @@ end
 local function background(widget)
 
   widget.capacity = round(getValue(widget.options.CapaScript) / 10.24)
-  -- widget.altitude = getValue(altimeter_id)
   widget.armed = getValue(armed_ls_id) > 0
   widget.flight_mode = {getFlightMode()}
 
@@ -50,9 +56,7 @@ local function refresh(widget)
   --background is not called automatically in display mode, so do it here if you need it.
   background(widget) 
 
-  -- lcd.drawText(widget.zone.x, widget.zone.y + 72, "Alt  " .. widget.altitude .. "m", LEFT + MIDSIZE + CUSTOM_COLOR)
   if widget.flight_mode[1] ~= 1 then
-    -- lcd.setColor(CUSTOM_COLOR, WHITE)
     lcd.drawText(widget.zone.x, widget.zone.y, widget.flight_mode[2].." mode", LEFT + MIDSIZE + TEXT_COLOR)
     if widget.armed then
       lcd.setColor(CUSTOM_COLOR, 0xE120)  -- red (5-6-5 format)

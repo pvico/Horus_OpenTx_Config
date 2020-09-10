@@ -1,10 +1,17 @@
--- -- FxJ Timer Widget
+-- FxJ Timer Widget
+-- Shows
+-- - Flight time goal
+-- - Counting up flight timer
+-- - Motor run time
+-- - Launch altitude
+-- - Total motor run time since motor armed
+-- This widget has to be placed in an upper zone as it expands lower than the upper quarter
 
+-- Philippe Vico 2020
 
 local options = {
     { "MotorRun", SOURCE },
-    { "LaunchAlt", SOURCE },
-    { "TimStrtCut", BOOL, 0 }
+    { "LaunchAlt", SOURCE }
 }
 
 local function create(zone, options)
