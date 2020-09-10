@@ -18,5 +18,6 @@
 /WIDGETS/Counter
 /WIDGETS/SHOWALL
 /WIDGETS/Timer2
+/WIDGETS/BattCheck
 *.luac
 .DS_Store
